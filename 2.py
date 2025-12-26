@@ -13,7 +13,3 @@ for i in range (len(A)):
         dA[i]=sort_dB[i]
     
 print(dA)
-
-print(sort_dB)
-print(dA)
-print(dB)

@@ -10,33 +10,42 @@
 # Следующие N строк: по два целых числа T_i и V_i, разделённые пробелом.
 # Гарантируется, что T_i строго возрастают.
 # Функция должна вернуть строку с одним числом — количеством воды сразу после долива в момент T_N.
+import sys
 
-N = int(input())
-t_i = []
-v_i = []
-for i in range(N):
-    inputs = inputs = list(map(str,input().split()))
+def uvlazh(input_str):
+    lines = input_str.strip().split('\n')
+    N = int(lines[0])
+    t_i = []
+    v_i = []
+    for i in range(1, N+1):
+        inputs = list(map(str,lines[i].split()))
 
-    t_i.append(int(inputs[0]))
-    v_i.append(int(inputs[1]))
+        t_i.append(int(inputs[0]))
+        v_i.append(int(inputs[1]))
 
-V = 0
-prev_t = 0  # время предыдущего события (0)
+    V = 0
+    prev_t = 0  # время предыдущего события (0)
 
-for j in range(N):
-    current_t = t_i[j]
-    add_v = v_i[j]
+    for j in range(N):
+        current_t = t_i[j]
+        add_v = v_i[j]
 
-    # Сколько времени прошло с прошлого момента - это и есть -1, т.к удобно по условию
-    delta_time_v = current_t - prev_t
+        # Сколько времени прошло с прошлого момента - это и есть -1, т.к удобно по условию
+        delta_time_v = current_t - prev_t
 
-    if V >= delta_time_v:
-        V -= delta_time_v
-    else:
-        V = 0
+        if V >= delta_time_v:
+            V -= delta_time_v
+        else:
+            V = 0
 
-    V += add_v
+        V += add_v
 
-    prev_t = current_t
+        prev_t = current_t
 
-print(V)
+    print(V)
+    return V
+
+
+if __name__ == "__main__":
+    input_str = sys.stdin.read()
+    uvlazh(input_str)
